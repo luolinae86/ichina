@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_055234) do
+ActiveRecord::Schema.define(version: 2020_03_26_062700) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nick_name", limit: 50
     t.string "phone", limit: 20
     t.string "address", limit: 50
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "topic_type", limit: 20, comment: "帖子类型：need_help(需要帮助):provide_help(提供帮助):report_safe(报平安)"
+    t.string "content"
+    t.string "viewed_count", comment: "被查看了多少次"
+    t.string "status", limit: 10, comment: "状态：published(发布):done(完成)"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
