@@ -35,10 +35,24 @@ module API
         topic = ::Topic.create(
           content: params[:content],
           topic_type: params[:topic_type],
+          latitude: params[:latitude],
+          longitude: params[:longitude],
           customer_id: current_user.id
         )
 
         present topic: (present topic, with: Entities::Topic),
+                response: success_response
+      end
+
+      desc '查询离我一定距离内的话题列表'
+      params do
+        use :uuid_latitude_longitude
+        requires :distance, type: String, desc: '距离'
+      end
+      post '/topic/list' do
+        topics = ::Topic.with_latitude_longitude(params[:latitude], params[:longitude])
+
+        present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end
 
