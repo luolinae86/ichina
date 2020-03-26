@@ -23,4 +23,6 @@ class Topic < ApplicationRecord
   belongs_to :customer
 
   scope :with_customer_id, ->(customer_id) { where(customer_id: customer_id) }
+  scope :with_topic_type, ->(topic_type) {topic_type.present? ? where(topic_type: topic_type) : all }
+
 end

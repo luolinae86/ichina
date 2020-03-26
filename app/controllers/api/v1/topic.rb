@@ -29,7 +29,7 @@ module API
       params do
         use :uuid_latitude_longitude
         requires :content, type: String, desc: '帖子内容'
-        requires :topic_type, type: String, values: %w[need_help provide_help reprot_safe], desc: '帖子类型'
+        requires :topic_type, type: String, values: %w[need_help provide_help report_safe], desc: '帖子类型'
       end
       post '/topic/create' do
         topic = ::Topic.create(
@@ -50,7 +50,19 @@ module API
         requires :distance, type: String, desc: '距离'
       end
       post '/topic/list' do
-        topics = ::Topic.with_latitude_longitude(params[:latitude], params[:longitude])
+        topics = ::Topic.all
+
+        present topics: (present topics, with: Entities::Topic),
+                response: success_response
+      end
+
+      desc '查询我发表的话题列表'
+      params do
+        requires :uuid, type: String, desc: '请传入uuid'
+        optional :topic_type, type: String, values: %w['' need_help provide_help report_safe], desc: '帖子类型'
+      end
+      post '/topic/list' do
+        topics = ::Topic.with_customer_id(current_user.id).with_topic_type(params[:topic_type])
 
         present topics: (present topics, with: Entities::Topic),
                 response: success_response
