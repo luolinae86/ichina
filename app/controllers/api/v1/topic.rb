@@ -28,6 +28,7 @@ module API
       desc '发布帖子'
       params do
         use :uuid_latitude_longitude
+        requires :is_urgent, type: Boolean, desc: '是否紧急'
         requires :content, type: String, desc: '帖子内容'
         requires :topic_type, type: String, values: %w[need_help provide_help report_safe], desc: '帖子类型'
       end
@@ -45,12 +46,38 @@ module API
                 response: success_response
       end
 
+      desc '完成帖子'
+      params do
+        requires :uuid, type: String, desc: '请传入用户 uuid'
+        requires :topic_uuid, type: String, desc: '请传入topic uuid'
+      end
+      post '/topic/done' do
+        topic = ::Topic.with_uuid(params[:topic_uuid]).last
+        return { response: error_response(ERROR_CODE[:POP_UP], '没有记录') } if topic.blank?
+        topic.update_attributes(status: :done)
+
+        present topic: (present topic, with: Entities::Topic),
+                response: success_response
+      end
+
       desc '查询离我一定距离内的话题列表'
+      params do
+        requires :uuid, type: String, desc: '请传入用户 uuid'
+        requires :topic_uuid, type: String, desc: '请传入topic uuid'
+      end
+      get '/topic/get' do
+
+        topic = ::Topic.with_uuid(params[:topic_uuid])
+        present topic: (present topic, with: Entities::Topic),
+                response: success_response
+      end
+
+      desc '根据uuid查询单个记录详情'
       params do
         use :uuid_latitude_longitude
         requires :distance, type: String, desc: '距离'
       end
-      post '/topic/list' do
+      get '/topic/by_uuid' do
 
         origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
         topics = ::Topic.within(params[:distance], origin: origin)
@@ -63,7 +90,7 @@ module API
         requires :uuid, type: String, desc: '请传入uuid'
         optional :topic_type, type: String, values: %w['' need_help provide_help report_safe], desc: '帖子类型'
       end
-      post '/topic/list' do
+      get '/topic/list' do
         topics = ::Topic.with_customer_id(current_user.id).with_topic_type(params[:topic_type])
 
         present topics: (present topics, with: Entities::Topic),
