@@ -1,0 +1,350 @@
+@import "font-awesome";
+
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: "Pingfang SC", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans;
+    color: #222222;
+    font-size: 14px;
+    margin: 0;
+    background-color: #F1F1F1;
+    line-height: 1.42857143;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.silver-bg {
+    background: #F5F7FA;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.login-page {
+    margin-top: 10%;
+    width: 100%;
+    max-width: 400px;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-page .center-container {
+    padding: 10px 25px 25px 25px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.14);
+    border-radius: 6px;
+    background-color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.login-page .center-container .brand {
+    font-size: 60px;
+    color: #FF8533;
+}
+
+.login-page .center-container .brand img {
+  width: 280px;
+}
+
+.login-page .center-container section {
+    display: block;
+    text-align: center;
+    padding: 0;
+    color: #848484;
+    background-color: white;
+    position: relative;
+}
+
+.login-page .center-container h2 {
+    display: block;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    line-height: 120%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: inherit;
+    font-weight: normal;
+    color: inherit;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.login-page .center-container .login-panel form {
+    text-align: left;
+    display: block;
+    margin-top: 0em;
+}
+
+.login-page .center-container .login-panel .fields {
+    padding: 0;
+    margin-top: 10px;
+}
+
+.login-page .center-container .login-panel .field {
+    overflow: hidden;
+    border: 1px solid #C3C9D0;
+    position: relative;
+    padding: 0;
+}
+
+.login-page .center-container .login-panel .field:first-child {
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+.login-page .center-container .login-panel .field+.field {
+    border-top: 0;
+}
+
+.login-page .center-container .login-panel .last-field {
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.login-page .center-container .login-panel .field input[type=email],
+.login-page .center-container .login-panel .field input[type=text],
+.login-page .center-container .login-panel .field input[type=password] {
+    border: 0;
+    height: 35px;
+    font-size: 14px;
+    max-width: none;
+    width: 100%;
+    -webkit-appearance: none;
+    line-height: 30px;
+    vertical-align: top;
+    padding: 0 6px;
+    font-weight: normal;
+    background: #FFF;
+    border-radius: 2px;
+    -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+    font-family: inherit;
+    font: inherit;
+    margin: 0;
+    -webkit-rtl-ordering: logical;
+    user-select: text;
+    cursor: auto;
+}
+
+.login-page .center-container .login-panel .submit-field {
+    margin-top: 10px;
+    padding: 1px 0;
+    border-top: 0;
+}
+
+.login-page .center-container .login-panel label {
+    display: block;
+    font-size: 1em;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: normal;
+    cursor: pointer;
+    outline: none !important;
+}
+
+.login-page a {
+    outline: none !important;
+    color: #009AFF;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.login-page .center-container .login-panel .field input[type=checkbox] {
+    margin: 4px 0 0;
+    line-height: normal;
+    box-sizing: border-box;
+    padding: 0;
+    outline: none !important;
+}
+
+.login-page .center-container .login-panel .submit-field input[type=submit] {
+    margin: 10px 0;
+    font-size: 14px;
+    max-width: none;
+    width: 100%;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: #009AFF;
+    border: 1px solid #009AFF;
+    color: #FFF;
+    display: inline-block;
+    padding: 0 28px;
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 28px;
+    border-radius: 2px;
+}
+
+.login-page .center-container .login-panel .social-login {
+    margin-bottom: 0;
+}
+
+.login-page .center-container .login-panel .social-login h5 {
+    margin-bottom: 0;
+    font-size: 1em;
+    margin-top: 10px;
+    font-family: inherit;
+    font-weight: normal;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.login-page .login-switcher {
+    margin-top: 15px;
+}
+
+
+
+
+
+.signHeader{
+    height: 90px;
+    line-height: 90px;
+}
+.whiteBg{
+    background: #fff;
+    min-width:1200px;
+}
+
+.signContainer ul ,.signContainer li{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+.signContainer p{
+    margin:0;
+    padding:0;
+}
+.signHeader li:first-child{
+    width: 280px;
+}
+.signHeader li:nth-child(2){
+    width: 334px;
+}
+.signContainer ul img{
+    vertical-align: middle;
+}
+.flParent li{
+    float: left;
+}
+.flow{
+    overflow: hidden;
+}
+.mainWidth{
+    width: 1200px;
+    margin: 0 auto;
+}
+.signMain{
+    background: image-url("signMainBg") center;
+    height: 900px;
+    min-width:1200px;
+}
+.signForm input[type=text]:focus,.signForm input[type=password]:focus{
+    outline:1px solid #42a5f5;
+}
+
+.signMainMask{
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+.signForm .signForm *{
+    box-sizing:border-box;
+}
+.signForm{
+    width: 425px;
+    padding:0 30px;
+    background: #fff;
+    border-radius: 3px;
+}
+.signForm h3{
+    color: #42a5f5;
+    font-size: 24px;
+    font-weight:400;
+    line-height:100px;
+    margin:5px 0 0;
+    text-align:center;
+}
+
+.signForm input[type=text],.signForm input[type=password],.signForm input[type=submit]{
+    line-height:50px;
+    border:1px solid #e2e2e2;
+    margin-bottom: 18px;
+    width:100%;
+    padding-left:15px;
+}
+input:-webkit-autofill {
+    background-color: #FAFFBD ;
+    background-image: none ;
+    color : #000 ;
+}
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0px 1000px #fff inset ;
+}
+.signForm input[type=submit]{
+    background: #42a5f5;
+    color:#fff;
+    margin-top:22px;
+}
+.signForm input[type=submit]:focus{
+    outline: 0;
+}
+.submit-field a{
+    color: #42a5f5;
+    text-decoration:none;
+}
+.signFormContainer{
+    padding: 190px 14px 0 0;
+    overflow:hidden;
+}
+.signForm{
+    float:right;
+}
+.signFooter{
+    line-height:27px;
+}
+.flUlParent{
+    overflow:hidden;
+}
+.flUlParent ul{
+    float:left;
+}
+.signFooter ul:first-child{
+    width: 544px;
+}
+.signFooter ul:nth-child(2){
+    width: 86px;
+    margin-right: 110px;
+}
+.signFooter ul:nth-child(2) li,.signFooter ul:last-child li{
+    text-align:center;
+}
+.signFooter ul:nth-child(3){
+    width: 373px;
+}
+.signFooter{
+    padding-top:25px;
+}
+.signFooter ul:last-child{
+    width: 86px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+

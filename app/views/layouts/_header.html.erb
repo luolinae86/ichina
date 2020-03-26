@@ -1,0 +1,25 @@
+<header class="noprint">
+  <div class="am-fl tpl-header-logo">
+  </div>
+
+  <div class="tpl-header-fluid">
+    <div class="am-fl tpl-header-switch-button am-icon-list" id="header-btn">
+      <span>
+      </span>
+    </div>
+    <div class="am-fr tpl-header-navbar">
+      <ul>
+        <li class=" tpl-header-navbar-welcome am-text-primary ">
+          <%= link_to edit_user_path(current_user.id),method: :get do %>
+            欢迎你: <span class="am-text-primary"><%= current_user.phone %> </span>
+          <% end %>
+        </li>
+        <li class="">
+          <%= link_to destroy_user_session_path, method: :delete, data: {confirm: :'确实要退出吗?'} do %>
+            <span class="am-icon-sign-out am-text-warning">退出</span>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

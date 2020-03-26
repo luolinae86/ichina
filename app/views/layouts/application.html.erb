@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>身边配送</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body data-type="index" class="theme-white <%= controller.controller_name %> <%= controller.action_name %>">
+    <div class="am-g">
+      <%= render "layouts/header" %>
+      <%= render "layouts/sidebar" %>
+
+      <div class="tpl-content-wrapper">
+        <div class="container-fluid am-cf">
+          <%= render "layouts/flash" %>
+          <%= yield %>
+        </div>
+      </div>
+
+      <%= render "layouts/footer" %>
+      <%= render "layouts/blueimp" %>
+
+    </div>
+  </body>
+  <%= javascript_include_tag "application" %>
+</html>

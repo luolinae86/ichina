@@ -1,0 +1,66 @@
+<div class="widget am-cf">  
+
+  <div class="widget-body am-fr hs-widget-body-lg">
+    <div class="am-g am-margin-bottom">
+      <div class="am-u-sm-9">
+        <%= search_form_for(@q_user,:html => {class: :'am-form am-form-inline'}) do |f| %>
+          <div class="am-form-group">
+            <%= f.text_field :phone_cont_all,class: :'am-form-field am-round border-rids',placeholder: "帐号-支持模糊查询" %>
+          </div>
+          <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+            <%= button_tag(type: :submit, class: :'am-btn am-btn-secondary am-round border-rids') do %>
+              <span class="am-icon-search">查询</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <% if true %>
+        <div class="am-u-sm-2 am-fr">
+          <%= link_to :new_user, class: :'am-btn am-btn-secondary am-btn-sm am-radius border-rids' do %>
+            <span class="am-icon-plus">新增用户</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="tpl-block">
+      <div class="am-g am-margin-top">
+        <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main" id="center-index-table">
+            <thead>
+              <tr>
+                <th>编号</th>
+                <th>登陆名</th>
+                <th>创建时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.phone %></td>
+									<td><%= user.created_at.localtime.strftime('%Y-%m-%d %H:%M') %> </td>
+                  <td>
+                    <div class="am-btn-group am-btn-group-xs">
+                      <%= link_to :编辑,edit_user_path(user.id),method: :get,class: :'am-btn am-btn-xs am-btn-warning am-radius edit-center-link' %>
+                      <% if false %>
+                      <%= link_to :删除,user_path(user.id),method: :delete,class: :'am-btn am-btn-xs am-btn-danger am-radius', data: {confirm: :'确认删除?'} %>
+                      <% end %>
+                    </div>
+                  </td  >
+                </tr>
+              <% end %>
+            </tbody >
+          </table>
+
+          <div class="am-cf">
+            <div class="am-fr">
+              <%= will_paginate @users, :previous_label=> '上一页',:next_label=> '下一页'  %>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="left-sidebar">
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-heading">
+      <span class="sidebar-nav-heading-info"> 人员管理</span>
+    </li>
+    <li class="sidebar-nav-link">
+      <%= link_to :users,:class => (controller_name == 'users' ? 'active' : nil) do %>
+        <i class="am-icon-user sidebar-nav-link-logo"></i>
+        <span class="am-text-secondary">内部帐号</span>
+      <% end %>
+    </li>
+    <li class="sidebar-nav-link">
+      <%= link_to :riders,:class => (controller_name == 'riders' ? 'active' : nil) do %>
+        <i class="am-icon-motorcycle sidebar-nav-link-logo"></i>
+        <span class="am-text-secondary">骑手列表</span>
+      <% end %>
+    </li>
+    <li class="sidebar-nav-link">
+      <%= link_to :merchants,:class => (controller_name == 'merchants' ? 'active' : nil) do %>
+        <i class="am-icon-coffee sidebar-nav-link-logo"></i>
+        <span class="am-text-secondary">商家列表</span>
+      <% end %>
+    </li>
+    <li class="sidebar-nav-heading">
+      <span class="sidebar-nav-heading-info"> 订单管理</span>
+    </li>
+    <li class="sidebar-nav-link">
+      <%= link_to :orders,:class => (controller_name == 'orders' ? 'active' : nil) do %>
+        <i class="am-icon-bars sidebar-nav-link-logo"></i>
+        <span class="am-text-secondary">订单列表</span>
+      <% end %>
+    </li>
+  </ul>
+</div>

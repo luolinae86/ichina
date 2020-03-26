@@ -1,0 +1,13 @@
+---
+:verbose: false
+:concurrency: 10
+:queues:
+  - [jobs, 1]
+  - [print, 2]
+  - [order.status, 2]
+  - [gps, 1]
+  - [notify,4]
+development:
+  :concurrency: 5
+production:
+  :concurrency: 10

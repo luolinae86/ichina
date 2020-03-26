@@ -1,0 +1,14 @@
+config/database.yml
+config/yetting.yml
+uploads
+public/uploads
+shared
+tmp
+log
+.env
+log/*.log
+test
+.idea
+.DS_Store
+dump.rdb
+/config/master.key

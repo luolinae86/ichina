@@ -1,0 +1,105 @@
+<style type="text/css">
+  html,body{
+    height:100%;
+  }
+  .signContainer{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  .signMain{
+    background: transparent !important;
+    height: auto;
+    position: relative;
+  }
+  .signForm{
+    position: absolute;
+    right: 20px;
+    top: 10%;
+  }
+  .signFormContainer{
+    padding-top: 0;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    margin-left: -600px;
+    top: 0;
+  }
+  .mainBgImg{
+    width: 100%;
+    display: block;
+  }
+  .signMainMask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+</style>
+
+<div class="signContainer">
+  <% if false %>
+  <div class="signHeader whiteBg">
+    <div class="mainWidth">
+      <ul class="flParent flow">
+        <li>
+          <%= link_to 'javascript:;'  do %>
+            <%= image_tag("health_records_logo.png") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to 'http://www.ineyehospital.com/'  do %>
+            <%= image_tag("ineye_logo.png") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to 'http://www.healthsvision.com/'  do %>
+            <%= image_tag("health_logo.png") %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+  <div class="signMain">
+    <!-- <div class="signMainMask"> -->
+      <%= image_tag("sign_main_bg.png",class:'mainBgImg') %>
+      <div class="signMainMask">
+      <div class="mainWidth signFormContainer">
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+          <div class="signForm">
+            <h3>身边配送</h3>
+            <div>
+              <input type="text" name="user[phone]" autofocus="autofocus" autocomplete="off" class="phone" placeholder="请输入用户名"/>
+            </div>
+            <div>
+              <input type="password" name="user[password]" placeholder="密码" autocomplete="off" class="password" />
+            </div>
+
+            <div class="form-group">
+              <%= rucaptcha_input_tag(class: 'form-control', placeholder: '请输入正确的图形验证码') %>
+              <%= rucaptcha_image_tag(alt: 'Captcha') %>
+            </div>
+            <div class="submit-field">
+              <!-- <a tabindex="-1" class="forget-password pull-right" href="#">忘记密码?</a> -->
+              <label class="auto-login">
+                <input type="checkbox" name="user[remember_me]" value="true" checked="checked" class="no-need-transform" />
+                下次自动登录
+              </label>
+              <input type="submit" name="commit" value="登录" class="login">
+            </div>
+          </div>
+        <% end %>
+      </div>
+      </div>
+
+    <!-- </div> -->
+  </div>
+  <div class="footer">
+    <p> </p>
+  </div>
+</div>
+
