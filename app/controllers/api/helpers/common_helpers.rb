@@ -31,7 +31,7 @@ module API
           end
 
           def current_user
-            @current_user ||= (Rider.find_by_uuid(params[:uuid]) || Merchant.find_by_uuid(params[:uuid]))
+            @current_user ||= Customer.find_by_uuid(params[:uuid])
           end
 
           def auth_user
