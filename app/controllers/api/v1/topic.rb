@@ -37,7 +37,8 @@ module API
           topic_type: params[:topic_type],
           latitude: params[:latitude],
           longitude: params[:longitude],
-          customer_id: current_user.id
+          customer_id: current_user.id,
+          uuid: SecureRandom.uuid.delete('-')
         )
 
         present topic: (present topic, with: Entities::Topic),
