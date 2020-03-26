@@ -50,8 +50,9 @@ module API
         requires :distance, type: String, desc: '距离'
       end
       post '/topic/list' do
-        topics = ::Topic.all
 
+        origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
+        topics = ::Topic.within(params[:distance], origin: origin)
         present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end

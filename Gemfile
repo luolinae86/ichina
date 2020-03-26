@@ -72,6 +72,8 @@ gem 'net-ssh'
 
 gem 'rucaptcha'
 
+gem 'geokit-rails'
+
 group :development, :test do
   gem 'listen'
 

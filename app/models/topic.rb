@@ -20,6 +20,8 @@
 #
 
 class Topic < ApplicationRecord
+  acts_as_mappable default_units: :kms, lat_column_name: :latitude, lng_column_name: :longitude
+
   belongs_to :customer
 
   scope :with_customer_id, ->(customer_id) { where(customer_id: customer_id) }
