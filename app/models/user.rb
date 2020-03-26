@@ -28,7 +28,6 @@
 #
 
 class User < ApplicationRecord
-  depends_on :eat
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
 
   before_validation do
