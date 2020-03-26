@@ -5,7 +5,7 @@ require 'api/utils/wx_biz_data_crypt'
 
 module API
   module V1
-    class Account < Grape::API
+    class Customer < Grape::API
       include Default
 
       format :json
@@ -22,7 +22,7 @@ module API
         requires :code, type: String, desc: 'code is needed'
         requires :account_type, type: String, desc: 'account is rider or merchant'
       end
-      post '/account/register' do
+      post '/customer/register' do
         logger.info "Account:register params #{params}"
         code = params[:code]
         url = "https://api.weixin.qq.com/sns/jscode2session?appid=#{Yetting.weixin['appid']}&secret=#{Yetting.weixin['secret']}&js_code=#{code}&grant_type=authorization_code"
@@ -58,7 +58,7 @@ module API
         requires :encrypted_data, type: String, desc: '请传入encrypted_data'
         requires :uuid, type: String, desc: '请传入uuid'
       end
-      post '/account/phone' do
+      post '/customer/phone' do
         auth_user
         redis = Redis.current
         if params[:code].blank?
@@ -96,7 +96,7 @@ module API
         requires :nick_name, type: String, desc: '请传入nick_name'
         requires :head_url,  type: String, desc: '请传入head_url'
       end
-      post '/account/nick_name_head_url' do
+      post '/customer/nick_name_head_url' do
         auth_user
 
         current_user.update_attributes(

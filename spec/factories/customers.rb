@@ -10,5 +10,8 @@
 #  updated_at :datetime         not null
 #
 
-class Customer < ApplicationRecord
+FactoryBot.define do
+  factory :customer do
+    
+  end
 end

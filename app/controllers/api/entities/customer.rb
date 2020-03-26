@@ -3,7 +3,7 @@
 module API
   module Entities
     class Customer < Grape::Entity
-      expose :name, :phone
+      expose :nick_name, :phone
     end
   end
 end
