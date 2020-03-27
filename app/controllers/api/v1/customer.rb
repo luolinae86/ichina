@@ -113,15 +113,6 @@ module API
                 }
       end
 
-      desc '用户完成了多少次帮助'
-      params do
-        requires :uuid, type: String, desc: '请传入uuid'
-      end
-      get '/customer/provide_help_numbers' do
-        present response: success_response,
-                count: ::Topic.with_customer_id(current_user.id).with_status(:done).count
-      end
-
     end
   end
 end

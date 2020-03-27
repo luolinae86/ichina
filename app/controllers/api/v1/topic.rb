@@ -54,21 +54,21 @@ module API
       post '/topic/done' do
         topic = ::Topic.with_uuid(params[:topic_uuid]).last
         return { response: error_response(ERROR_CODE[:POP_UP], '没有记录') } if topic.blank?
-        topic.update_attributes(status: :done)
 
+        topic.update_attributes(status: :done)
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
       end
 
-      desc '查询离我一定距离内的话题列表'
+      desc '查询一定距离内的话题列表'
       params do
         requires :uuid, type: String, desc: '请传入用户 uuid'
         requires :topic_uuid, type: String, desc: '请传入topic uuid'
       end
-      get '/topic/get' do
-
-        topic = ::Topic.with_uuid(params[:topic_uuid])
-        present topic: (present topic, with: Entities::Topic),
+      get '/topic/within_distance' do
+        origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
+        topics = ::Topic.within(params[:distance], origin: origin)
+        present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end
 
@@ -78,24 +78,22 @@ module API
         requires :distance, type: String, desc: '距离'
       end
       get '/topic/by_uuid' do
-
-        origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
-        topics = ::Topic.within(params[:distance], origin: origin)
-        present topics: (present topics, with: Entities::Topic),
+        topic = ::Topic.with_uuid(params[:topic_uuid])
+        present topic: (present topic, with: Entities::Topic),
                 response: success_response
       end
 
       desc '查询我发表的话题列表'
       params do
         requires :uuid, type: String, desc: '请传入uuid'
-        optional :topic_type, type: String, values: %w['' need_help provide_help report_safe], desc: '帖子类型'
+        optional :topic_type, type: String, values: %w[nil need_help provide_help report_safe], desc: '帖子类型'
       end
-      get '/topic/list' do
+      get '/topic/my_list' do
         topics = ::Topic.with_customer_id(current_user.id).with_topic_type(params[:topic_type])
-
         present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end
+
 
     end
   end
