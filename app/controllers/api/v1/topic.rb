@@ -62,8 +62,8 @@ module API
 
       desc '查询一定距离内的话题列表'
       params do
-        requires :uuid, type: String, desc: '请传入用户 uuid'
-        requires :topic_uuid, type: String, desc: '请传入topic uuid'
+        use :uuid_latitude_longitude
+        requires :distance, type: String, desc: '距离'
       end
       get '/topic/within_distance' do
         origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
@@ -74,8 +74,8 @@ module API
 
       desc '根据uuid查询单个记录详情'
       params do
-        use :uuid_latitude_longitude
-        requires :distance, type: String, desc: '距离'
+        requires :uuid, type: String, desc: '请传入用户 uuid'
+        requires :topic_uuid, type: String, desc: '请传入topic uuid'
       end
       get '/topic/by_uuid' do
         topic = ::Topic.with_uuid(params[:topic_uuid])
@@ -86,7 +86,7 @@ module API
       desc '查询我发表的话题列表'
       params do
         requires :uuid, type: String, desc: '请传入uuid'
-        optional :topic_type, type: String, values: %w[nil need_help provide_help report_safe], desc: '帖子类型'
+        optional :topic_type, type: String, values: %w[need_help provide_help report_safe], desc: '帖子类型'
       end
       get '/topic/my_list' do
         topics = ::Topic.with_customer_id(current_user.id).with_topic_type(params[:topic_type])
