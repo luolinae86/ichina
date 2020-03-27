@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_131144) do
+ActiveRecord::Schema.define(version: 2020_03_27_024154) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nick_name", limit: 50
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_03_26_131144) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "uuid", limit: 36
     t.string "head_url"
+    t.string "openid", limit: 50
   end
 
   create_table "topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

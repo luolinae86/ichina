@@ -20,7 +20,6 @@ module API
       desc '用户从小程序登陆注册'
       params do
         requires :code, type: String, desc: 'code is needed'
-        requires :account_type, type: String, desc: 'account is rider or merchant'
       end
       post '/customer/register' do
         logger.info "Account:register params #{params}"
@@ -32,23 +31,15 @@ module API
 
         return { response: error_response(ERROR_CODE[:POP_UP], '访问微信服务器错误') } unless msg['errcode'].blank?
 
-        account = if params[:account_type] == 'rider'
-                    Rider.find_or_create_by!(openid: msg['openid'])
-                  else
-                    Merchant.find_or_create_by!(openid: msg['openid'])
-                  end
+
+        customer = ::Customer.find_or_create_by!(openid: msg['openid'])
 
         # 将session_key和uuid绑定，先放内存里面，后面可以获取
         redis = Redis.current
-        redis.set(account.uuid, msg['session_key'])
+        redis.set(customer.uuid, msg['session_key'])
 
-        has_rider_group = RiderGroupMember.find_by_rider_id(account.id).blank? ? false : true
         present response: success_response,
-                account: {
-                  uuid: account.uuid, id: account.id, phone: account.phone,
-                  nick_name: account.nick_name, head_url: account.head_url,
-                  has_rider_group: has_rider_group
-                }
+                customer: (present customer, with: Entities::Customer)
       end
 
       desc '用户绑定手机号'
@@ -81,13 +72,8 @@ module API
         logger.info "Account::phone decrypted_message #{decrypted_message}"
 
         current_user.update_attributes(phone: decrypted_message['phoneNumber'])
-        has_rider_group = current_user.rider_group_member.blank? ? false : true
         present response: success_response,
-                account: {
-                  uuid: current_user.uuid, id: current_user.id, phone: current_user.phone,
-                  nick_name: current_user.nick_name, head_url: current_user.head_url,
-                  has_rider_group: has_rider_group
-                }
+                customer: (present customer, with: Entities::Customer)
       end
 
       desc '用户更新昵称和头像'
@@ -104,13 +90,8 @@ module API
           head_url: params[:head_url]
         )
 
-        has_rider_group = current_user.rider_group_member.blank? ? false : true
         present response: success_response,
-                account: {
-                  uuid: current_user.uuid, id: current_user.id, phone: current_user.phone,
-                  nick_name: current_user.nick_name, head_url: current_user.head_url,
-                  has_rider_group: has_rider_group
-                }
+                customer: (present customer, with: Entities::Customer)
       end
 
     end
