@@ -72,13 +72,18 @@ module API
                 response: success_response
       end
 
-      desc '根据uuid查询单个记录详情'
+      desc '根据uuid查看单个记录详情'
       params do
         requires :uuid, type: String, desc: '请传入用户 uuid'
         requires :topic_uuid, type: String, desc: '请传入topic uuid'
       end
       get '/topic/by_uuid' do
-        topic = ::Topic.with_uuid(params[:topic_uuid])
+
+        topic = ::Topic.with_uuid(params[:topic_uuid]).last
+        return { response: error_response(ERROR_CODE[:POP_UP], '没有记录') } if topic.blank?
+
+        # 更新这个记录的查看次数
+        topic.update_attributes(viewed_count: topic.viewed_count + 1)
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
       end
