@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_27_024154) do
+ActiveRecord::Schema.define(version: 2020_03_27_141434) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nick_name", limit: 50
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2020_03_27_024154) do
     t.string "status", default: "published", comment: "状态：published(发布):done(完成)"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "latitude", limit: 15
-    t.string "longitude", limit: 15
+    t.string "latitude", limit: 40
+    t.string "longitude", limit: 40
     t.string "uuid", limit: 32
     t.boolean "is_urgent", default: false
     t.index ["customer_id"], name: "index_topics_on_customer_id"

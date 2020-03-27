@@ -5,8 +5,8 @@
 #  id                                                                                   :bigint           not null, primary key
 #  content                                                                              :string(255)
 #  is_urgent                                                                            :boolean          default(FALSE)
-#  latitude                                                                             :string(15)
-#  longitude                                                                            :string(15)
+#  latitude                                                                             :string(40)
+#  longitude                                                                            :string(40)
 #  status(状态：published(发布):done(完成))                                             :string(255)      default("published")
 #  topic_type(帖子类型：need_help(需要帮助):provide_help(提供帮助):report_safe(报平安)) :string(20)
 #  uuid                                                                                 :string(32)

@@ -48,10 +48,11 @@ task :production do
 end
 
 task :development do
-  set :domain, '115.29.241.178'
-  set :user, 'deployer'
+  set :deploy_to, '/home/ms/ichina'
+  set :domain, '34.89.16.39'
+  set :user, 'ms'
   set :port, '22'
-  set :rvm_path, '/home/deployer/.rvm/bin/rvm'
+  set :rvm_path, '/home/ms/.rvm/bin/rvm'
   set :rails_env, 'production'
   set :unicorn_env, 'production'
 end
