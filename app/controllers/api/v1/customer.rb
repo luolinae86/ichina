@@ -73,7 +73,7 @@ module API
 
         current_user.update_attributes(phone: decrypted_message['phoneNumber'])
         present response: success_response,
-                customer: (present customer, with: Entities::Customer)
+                customer: (present current_user, with: Entities::Customer)
       end
 
       desc '用户更新昵称和头像'
