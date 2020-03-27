@@ -91,7 +91,7 @@ module API
         )
 
         present response: success_response,
-                customer: (present customer, with: Entities::Customer)
+                customer: (present current_user, with: Entities::Customer)
       end
 
     end
