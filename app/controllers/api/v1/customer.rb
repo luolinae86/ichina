@@ -31,7 +31,6 @@ module API
 
         return { response: error_response(ERROR_CODE[:POP_UP], '访问微信服务器错误') } unless msg['errcode'].blank?
 
-
         customer = ::Customer.find_or_create_by!(openid: msg['openid'])
 
         # 将session_key和uuid绑定，先放内存里面，后面可以获取
