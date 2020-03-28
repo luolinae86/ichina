@@ -52,7 +52,7 @@ task :development do
   set :domain, 'china-uk.uk '
   set :user, 'jd'
   set :port, '22'
-  set :rvm_path, '/home/ms/.rvm/bin/rvm'
+  set :rvm_path, '/home/jd/.rvm/bin/rvm'
   set :rails_env, 'production'
   set :unicorn_env, 'production'
 end
