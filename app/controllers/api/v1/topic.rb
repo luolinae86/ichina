@@ -39,6 +39,7 @@ module API
           latitude: params[:latitude],
           longitude: params[:longitude],
           customer_id: current_user.id,
+          is_urgent: params[:is_urgent],
           uuid: SecureRandom.uuid.delete('-')
         )
 
