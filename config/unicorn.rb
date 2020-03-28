@@ -17,7 +17,8 @@ pid "#{APP_HOME}/tmp/pids/unicorn.pid"
 
 if ENV['RAILS_ENV'] == 'production'
   listen '/home/deployer/ichina/tmp/sockets/unicorn.sock', backlog: 64
-  pid '/home/deployer/ichina/tmp/pids/unicorn.pid'
+  # pid '/home/deployer/ichina/tmp/pids/unicorn.pid'
+  pid '/home/ms/ichina/tmp/pids/unicorn.pid'
 else
   listen 3001, tcp_nopush: true
 end
