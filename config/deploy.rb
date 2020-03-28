@@ -48,9 +48,9 @@ task :production do
 end
 
 task :development do
-  set :deploy_to, '/home/ms/ichina'
-  set :domain, '34.89.16.39'
-  set :user, 'ms'
+  set :deploy_to, '/home/jd/ichina'
+  set :domain, 'china-uk.uk '
+  set :user, 'jd'
   set :port, '22'
   set :rvm_path, '/home/ms/.rvm/bin/rvm'
   set :rails_env, 'production'
@@ -62,7 +62,7 @@ task :deploy => :environment do
   to :before_hook do
   end
   deploy do
-    invoke :'sidekiq:quiet'
+    #invoke :'sidekiq:quiet'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -71,7 +71,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      invoke :'sidekiq:restart'
+      #invoke :'sidekiq:restart'
       invoke :'unicorn:restart'
     end
   end
