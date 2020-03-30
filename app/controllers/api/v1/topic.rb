@@ -31,6 +31,7 @@ module API
         requires :is_urgent, type: Boolean, desc: '是否紧急'
         requires :content, type: String, desc: '帖子内容'
         requires :topic_type, type: String, values: %w[need_help provide_help report_safe], desc: '帖子类型'
+        requires :social_account, type: String, desc: '社交帐号'
       end
       post '/topic/create' do
         topic = ::Topic.create(
@@ -40,8 +41,11 @@ module API
           longitude: params[:longitude],
           customer_id: current_user.id,
           is_urgent: params[:is_urgent],
-          uuid: SecureRandom.uuid.delete('-')
+          uuid: SecureRandom.uuid.delete('-'),
+          social_account: params[:social_account]
         )
+
+        current_user.update_attributes(social_account: params[:social_account]) if current_user.social_account.blank?
 
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
