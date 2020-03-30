@@ -93,6 +93,22 @@ module API
                 customer: (present current_user, with: Entities::Customer)
       end
 
+      desc '用户更新社交帐号'
+      params do
+        requires :uuid, type: String, desc: '请传入uuid'
+        requires :social_account, type: String, desc: '请传入用户社交帐号'
+      end
+      post '/customer/social_account' do
+        auth_user
+
+        current_user.update_attributes(
+          social_account: params[:social_account]
+        )
+
+        present response: success_response,
+                customer: (present current_user, with: Entities::Customer)
+      end
+
     end
   end
 end
