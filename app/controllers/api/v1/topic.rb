@@ -44,7 +44,7 @@ module API
           uuid: SecureRandom.uuid.delete('-')
         )
 
-        current_user.update_attributes(social_account: params[:social_account]) if current_user.social_account.blank?
+        current_user.update_attributes(social_account: params[:social_account])
 
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
