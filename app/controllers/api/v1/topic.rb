@@ -41,8 +41,7 @@ module API
           longitude: params[:longitude],
           customer_id: current_user.id,
           is_urgent: params[:is_urgent],
-          uuid: SecureRandom.uuid.delete('-'),
-          social_account: params[:social_account]
+          uuid: SecureRandom.uuid.delete('-')
         )
 
         current_user.update_attributes(social_account: params[:social_account]) if current_user.social_account.blank?
