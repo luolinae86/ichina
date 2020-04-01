@@ -45,7 +45,26 @@ module API
         )
 
         current_user.update_attributes(social_account: params[:social_account])
+        
+        present topic: (present topic, with: Entities::Topic),
+                response: success_response
+      end
 
+      desc '更新帖子'
+      params do
+        use :uuid_latitude_longitude
+        requires :topic_uuid, type: String, desc: '请传入topic uuid'
+        requires :content, type: String, desc: '帖子内容'
+        requires :is_urgent, type: Boolean, desc: '是否紧急'
+      end
+      post '/topic/update' do
+        topic = ::Topic.with_uuid(params[:topic_uuid]).last
+        topic.update_attributes(
+          content: params[:content],
+          is_urgent: params[:is_urgent],
+          latitude: params[:latitude],
+          longitude: params[:longitude]
+        )
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
       end
@@ -57,11 +76,23 @@ module API
       end
       post '/topic/done' do
         topic = ::Topic.with_uuid(params[:topic_uuid]).last
-        return { response: error_response(ERROR_CODE[:POP_UP], '没有记录') } if topic.blank?
-
         topic.update_attributes(status: :done)
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
+      end
+
+      desc '删除'
+      params do
+        requires :uuid, type: String, desc: '请传入uuid'
+        requires :topic_uuid, type: String, desc: '请传入topic uuid'
+      end
+      post '/topic/delete' do
+        topic = ::Topic.with_uuid(params[:topic_uuid]).last
+        return { response: error_response(ERROR_CODE[:POP_UP], '完成的记录不能删除') } if topic.status == 'done'
+
+        topic.destroy
+        
+        present response: success_response
       end
 
       desc '查询一定距离内的话题列表'
