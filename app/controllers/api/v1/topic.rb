@@ -23,6 +23,11 @@ module API
           requires :latitude, type: String, desc: 'latitude'
           requires :longitude, type: String, desc: 'longitude'
         end
+
+        params :uuid_topic_uuid do
+          requires :uuid, type: String, desc: '请传入用户 uuid'
+          requires :topic_uuid, type: String, desc: '请传入topic uuid'
+        end
       end
 
       desc '发布帖子'
@@ -71,8 +76,7 @@ module API
 
       desc '完成帖子'
       params do
-        requires :uuid, type: String, desc: '请传入用户 uuid'
-        requires :topic_uuid, type: String, desc: '请传入topic uuid'
+        use :uuid_topic_uuid
       end
       post '/topic/done' do
         topic = ::Topic.with_uuid(params[:topic_uuid]).last
@@ -134,6 +138,26 @@ module API
                 response: success_response
       end
 
+      desc '话题被投诉'
+      params do
+        requires :uuid, type: String, desc: '请传入用户 uuid'
+        requires :topic_id, type: Integer, desc: '请传入topic id'
+        requires :content
+        requires :complaint_type, \
+                 type: String, \
+                 values: %w[illegal_and_prohibited pornography attack advertisement bad_information], \
+                 desc: '投诉类型'
+      end
+      post 'topic/complaint' do
+        complaint = Complaint.create(
+          topic_id: params[:topic_id],
+          complaint_type: params[:complaint_type],
+          content: params[:content]
+        )
+
+        present complaint: (present complaint, with: Entities::Complaint),
+                response: success_response
+      end
 
     end
   end

@@ -26,6 +26,7 @@ class Topic < ApplicationRecord
   acts_as_mappable default_units: :kms, lat_column_name: :latitude, lng_column_name: :longitude
 
   belongs_to :customer
+  has_many :complaints
 
   scope :with_uuid, ->(uuid) { where(uuid: uuid) }
   scope :with_status, ->(status) { where(status: status) }
