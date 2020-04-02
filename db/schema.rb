@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_063250) do
+ActiveRecord::Schema.define(version: 2020_04_02_124405) do
 
   create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "topic_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_063250) do
     t.string "head_url"
     t.string "openid", limit: 50
     t.string "social_account", comment: "用户发贴用的社交帐号"
+    t.string "pc_id", limit: 40, comment: "PC端的用户ID"
   end
 
   create_table "topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

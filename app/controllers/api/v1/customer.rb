@@ -20,6 +20,7 @@ module API
       desc '用户从小程序登陆注册'
       params do
         requires :code, type: String, desc: 'code is needed'
+        optional :pc_id, type: String, desc: '从PC端带过来的id，主要作用是方便双方的认证'
       end
       post '/customer/register' do
         logger.info "Account:register params #{params}"
@@ -32,6 +33,7 @@ module API
         return { response: error_response(ERROR_CODE[:POP_UP], '访问微信服务器错误') } unless msg['errcode'].blank?
 
         customer = ::Customer.find_or_create_by!(openid: msg['openid'])
+        customer.update_attributes(pc_id: params[:pc_id]) unless params[:pc_id].blank?
 
         # 将session_key和uuid绑定，先放内存里面，后面可以获取
         redis = Redis.current
