@@ -106,7 +106,8 @@ module API
       end
       get '/topic/within_distance' do
         origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
-        topics = ::Topic.within(params[:distance], origin: origin).with_status(:published)
+        topics = ::Topic.includes(:customer, :complaints)\
+                        .within(params[:distance], origin: origin).with_status(:published)
         present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end
@@ -133,7 +134,8 @@ module API
         optional :topic_type, type: String, values: %w[need_help provide_help report_safe], desc: '帖子类型'
       end
       get '/topic/my_list' do
-        topics = ::Topic.with_customer_id(current_user.id).with_topic_type(params[:topic_type])
+        topics = ::Topic.includes(:customer, :complaints)\
+                        .with_customer_id(current_user.id).with_topic_type(params[:topic_type])
         present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end
