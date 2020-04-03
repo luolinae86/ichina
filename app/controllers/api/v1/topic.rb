@@ -50,7 +50,7 @@ module API
         )
 
         current_user.update_attributes(social_account: params[:social_account])
-        
+
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
       end
@@ -95,7 +95,7 @@ module API
         return { response: error_response(ERROR_CODE[:POP_UP], '完成的记录不能删除') } if topic.status == 'done'
 
         topic.destroy
-        
+
         present response: success_response
       end
 
@@ -106,7 +106,7 @@ module API
       end
       get '/topic/within_distance' do
         origin = Geokit::LatLng.new(params[:latitude], params[:longitude])
-        topics = ::Topic.within(params[:distance], origin: origin)
+        topics = ::Topic.within(params[:distance], origin: origin).with_status(:published)
         present topics: (present topics, with: Entities::Topic),
                 response: success_response
       end
