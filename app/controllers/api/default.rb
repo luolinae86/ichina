@@ -8,6 +8,7 @@ module API
 
     included do
       include Helpers::CommonHelpers
+      include Helpers::WechatHelpers
 
       version 'v1', using: :path
 

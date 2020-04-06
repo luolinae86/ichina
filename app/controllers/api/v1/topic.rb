@@ -28,6 +28,11 @@ module API
           requires :uuid, type: String, desc: '请传入用户 uuid'
           requires :topic_uuid, type: String, desc: '请传入topic uuid'
         end
+
+        def check_content(content)
+          security_message?(access_token, content)
+        end
+
       end
 
       desc '发布帖子'
@@ -36,9 +41,11 @@ module API
         requires :is_urgent, type: Boolean, desc: '是否紧急'
         requires :content, type: String, desc: '帖子内容'
         requires :topic_type, type: String, values: %w[need_help provide_help report_safe], desc: '帖子类型'
-        requires :social_account, type: String, desc: '社交帐号'
+        optional :social_account, type: String, desc: '社交帐号'
       end
       post '/topic/create' do
+        return { response: error_response(ERROR_CODE[:POP_UP], '内容不合法') } unless check_content(params[:content])
+
         topic = ::Topic.create(
           content: params[:content],
           topic_type: params[:topic_type],
@@ -49,7 +56,7 @@ module API
           uuid: SecureRandom.uuid.delete('-')
         )
 
-        current_user.update_attributes(social_account: params[:social_account])
+        # current_user.update_attributes(social_account: params[:social_account])
 
         present topic: (present topic, with: Entities::Topic),
                 response: success_response
