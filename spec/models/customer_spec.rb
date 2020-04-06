@@ -2,7 +2,7 @@
 #
 # Table name: customers
 #
-#  id                                   :bigint           not null, primary key
+#  id                                   :string(36)       not null, primary key
 #  address                              :string(50)
 #  head_url                             :string(255)
 #  nick_name                            :string(50)
@@ -12,6 +12,7 @@
 #  uuid                                 :string(36)
 #  created_at                           :datetime         not null
 #  updated_at                           :datetime         not null
+#  pc_id(PC端的用户ID)                  :string(40)
 #
 
 require 'rails_helper'

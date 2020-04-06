@@ -20,4 +20,9 @@ class Customer < ApplicationRecord
   before_validation do
     write_attribute(:uuid, SecureRandom.uuid.delete('-')) if new_record? || uuid.blank?
   end
+
+  before_create :set_uuid
+  def set_uuid
+    self.id = SecureRandom.uuid
+  end
 end

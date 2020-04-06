@@ -2,7 +2,7 @@
 #
 # Table name: topics
 #
-#  id                                                                                   :bigint           not null, primary key
+#  id                                                                                   :string(36)       not null, primary key
 #  content                                                                              :string(255)
 #  is_urgent                                                                            :boolean          default(FALSE)
 #  latitude                                                                             :string(40)
@@ -13,13 +13,12 @@
 #  viewed_count(被查看了多少次)                                                         :integer          default(0)
 #  created_at                                                                           :datetime         not null
 #  updated_at                                                                           :datetime         not null
-#  customer_id                                                                          :integer
+#  customer_id                                                                          :string(255)
 #
 # Indexes
 #
-#  index_topics_on_customer_id             (customer_id)
-#  index_topics_on_latitude_and_longitude  (latitude,longitude)
-#  index_topics_on_uuid                    (uuid)
+#  index_topics_on_customer_id  (customer_id)
+#  index_topics_on_uuid         (uuid)
 #
 
 require 'rails_helper'

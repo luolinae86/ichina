@@ -12,15 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2020_04_02_124405) do
 
-  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "topic_id"
+  create_table "complaints", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "topic_id"
     t.string "complaint_type", limit: 20, comment: "被投诉的类型(:违法违禁 :色情低俗, :攻击谩骂, :营销广告, :青少年不良信息"
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "customers", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nick_name", limit: 50
     t.string "phone", limit: 20
     t.string "address", limit: 50
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 2020_04_02_124405) do
     t.string "pc_id", limit: 40, comment: "PC端的用户ID"
   end
 
-  create_table "topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "customer_id"
+  create_table "topics", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "customer_id"
     t.string "topic_type", limit: 20, comment: "帖子类型：need_help(需要帮助):provide_help(提供帮助):report_safe(报平安)"
     t.string "content"
     t.integer "viewed_count", default: 0, comment: "被查看了多少次"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2020_04_02_124405) do
     t.string "uuid", limit: 32
     t.boolean "is_urgent", default: false
     t.index ["customer_id"], name: "index_topics_on_customer_id"
-    t.index ["latitude", "longitude"], name: "index_topics_on_latitude_and_longitude"
     t.index ["uuid"], name: "index_topics_on_uuid"
   end
 
