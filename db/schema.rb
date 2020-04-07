@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_144516) do
+ActiveRecord::Schema.define(version: 2020_04_07_145435) do
 
   create_table "complaints", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "topic_id"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2020_04_07_144516) do
     t.string "update_pin", limit: 50, null: false, comment: "更新人"
     t.integer "sys_version", default: 1, null: false, comment: "版本号"
     t.boolean "yn", default: false, comment: "删除标识 0:有效 1:无效"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "topic_thumbs_ups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "topic_id", limit: 32
+    t.string "user_id", limit: 32
+    t.integer "state", default: 0, comment: "0: 1"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
