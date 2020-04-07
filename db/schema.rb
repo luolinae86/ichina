@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_143245) do
+ActiveRecord::Schema.define(version: 2020_04_07_144516) do
 
   create_table "complaints", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "topic_id"
@@ -35,6 +35,20 @@ ActiveRecord::Schema.define(version: 2020_04_07_143245) do
     t.string "user_name", limit: 50, comment: "用户名"
     t.string "postcodes", limit: 20, comment: "邮编"
     t.string "user_pwd", limit: 50, comment: "用户状态"
+  end
+
+  create_table "login_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "user_name", limit: 20, null: false, comment: "帐号"
+    t.string "token", limit: 50, null: false, comment: "token"
+    t.string "user_id", limit: 32
+    t.integer "user_type", default: 0, comment: "0"
+    t.integer "user_state", default: 0, comment: "0,1"
+    t.string "create_pin", limit: 50, null: false, comment: "创建人"
+    t.string "update_pin", limit: 50, null: false, comment: "更新人"
+    t.integer "sys_version", default: 1, null: false, comment: "版本号"
+    t.boolean "yn", default: false, comment: "删除标识 0:有效 1:无效"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "topics", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
