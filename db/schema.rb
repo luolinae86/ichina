@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_124405) do
+ActiveRecord::Schema.define(version: 2020_04_07_142220) do
 
   create_table "complaints", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "topic_id"
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(version: 2020_04_02_124405) do
     t.string "longitude", limit: 40
     t.string "uuid", limit: 32
     t.boolean "is_urgent", default: false
+    t.string "parent_id", limit: 32, comment: "关联帖子ID"
+    t.integer "up_count", default: 0, comment: "点赞次数"
+    t.integer "down_count", default: 0, comment: "被踩次数"
     t.index ["customer_id"], name: "index_topics_on_customer_id"
     t.index ["uuid"], name: "index_topics_on_uuid"
   end
