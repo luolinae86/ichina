@@ -19,7 +19,8 @@ module API
               msg = JSON.parse(resp.body)
               logger.info "access_token ====  message  #{msg}"
               access_token = msg['access_token']
-              redis.set('access_token', access_token, expire: 7000)
+              redis.set('access_token', access_token)
+              redis.expire('access_token', 3600)
             end
 
             access_token
