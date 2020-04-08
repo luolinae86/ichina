@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_145435) do
+ActiveRecord::Schema.define(version: 2020_04_08_004541) do
 
   create_table "complaints", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "topic_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_145435) do
     t.string "user_name", limit: 50, comment: "用户名"
     t.string "postcodes", limit: 20, comment: "邮编"
     t.string "user_pwd", limit: 50, comment: "用户状态"
+    t.integer "user_state", default: 0, comment: "用户状态"
   end
 
   create_table "login_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
